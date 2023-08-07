@@ -11,19 +11,13 @@ function App() {
     getOrders()
     .then(data=>setOrders(data.orders))
     .catch((err) => console.error("Error fetching:", err));
-  }, [orders]);
+  }, []);
   
   function addOrder(newOrder){
-    // console.log(newOrder)
-    // console.log(orders)
     if (newOrder.name && newOrder.ingredients.length){
       postOrder(newOrder)
       setOrders([...orders,newOrder])
-
     }
-
-    // console.log('hello order!', newOrder)
-    // console.log('hello orders!', orders)
   }
 
   return (
@@ -32,7 +26,6 @@ function App() {
         <h1>Burrito Builder</h1>
         <OrderForm addOrder={addOrder}/>
       </header>
-
       <Orders orders={orders} />
     </main>
   );
