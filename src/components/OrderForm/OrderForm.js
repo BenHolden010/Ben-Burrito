@@ -1,13 +1,21 @@
 import { useState } from "react";
 
-function OrderForm(props) {
+function OrderForm({addOrder}) {
   const [name, setName] = useState("");
   const [ingredients, setIngredients] = useState([]);
-
+  
   function handleSubmit(e) {
     e.preventDefault();
+    const newOrder = {
+      name,
+      ingredients
+    }
+    addOrder(newOrder)
+
     clearInputs();
   }
+
+
 
   function clearInputs() {
     setName("");
@@ -33,7 +41,9 @@ function OrderForm(props) {
       <button
         key={ingredient}
         name={ingredient}
-        // onClick={(e) => }
+        onClick={(e) => {
+          e.preventDefault()
+          setIngredients([...ingredients, ingredient])} }
       >
         {ingredient}
       </button>
@@ -47,7 +57,7 @@ function OrderForm(props) {
         placeholder="Name"
         name="name"
         value={name}
-        // onChange={(e) => }
+        onChange={event => setName(event.target.value) }
       />
 
       {ingredientButtons}
